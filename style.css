@@ -1,0 +1,22 @@
+.e-face.my-bg {
+    background: linear-gradient(#343a40, rgba(0, 0, 0, 0.1)), url('img/bg.jpg') no-repeat fixed center;
+    background-size: cover;
+    height: 100%;
+}
+
+*.my-bg p, .my-bg {
+    color: #fff;
+}
+
+.card-body.d-flex.align-elements {
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+m3-card {
+    transition: transform .5s ease-in-out;
+}
+
+m3-card:hover {
+    transform: scale3d(1.03, 1.03, 1.03);
+}

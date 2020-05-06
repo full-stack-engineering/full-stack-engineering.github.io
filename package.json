@@ -1,0 +1,29 @@
+{
+  "name": "full-stack-engineering.github.io",
+  "version": "1.0.0",
+  "description": "Full-Stack Engineering online courses",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/full-stack-engineering/full-stack-engineering.github.io.git"
+  },
+  "keywords": [
+    "full-stack",
+    "engineering"
+  ],
+  "author": "mat3e",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/full-stack-engineering/full-stack-engineering.github.io/issues"
+  },
+  "homepage": "https://github.com/full-stack-engineering/full-stack-engineering.github.io#readme",
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
