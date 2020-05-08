@@ -17,25 +17,83 @@
     <nav class="e-nav no-bg">
         <a href="#"><img src="img/logo/fse.png" style="width: 45px; border: solid 1px gray"></a>
         <i class="e-distribution"></i>
-        <a class="e-btn circle small transparent no-shadow no-mobile" href="https://github.com/full-stack-engineering"><i class="fab fa-github"></i></a>
-        <a class="e-btn circle small transparent no-shadow no-mobile" href="https://twitter.com/_mat3e_"><i class="fab fa-twitter"></i></a>
-        <a class="e-btn circle small transparent no-shadow no-mobile" href="https://www.linkedin.com/in/mateusz-chrzonstowski/"><i class="fab fa-linkedin-in"></i></a>
+        <a class="e-btn circle small transparent no-shadow no-mobile"
+           href="https://github.com/full-stack-engineering"><i class="fab fa-github"></i></a>
+        <a class="e-btn circle small transparent no-shadow no-mobile" href="https://twitter.com/_mat3e_"><i
+                class="fab fa-twitter"></i></a>
+        <a class="e-btn circle small transparent no-shadow no-mobile"
+           href="https://www.linkedin.com/in/mateusz-chrzonstowski/"><i class="fab fa-linkedin-in"></i></a>
     </nav>
     <section class="face-body centered">
         <div class="e-container">
+            <!-- TODO: implement -->
+            <m3-category-nav></m3-category-nav>
+            <article class="e-note block danger text-left">
+                <div class="note-body">
+                    <h1 class="e-title">Back-end</h1>
+                    <h2 class="e-subtitle">Serce aplikacji</h2>
+                    <p class="text-justify">
+                        Logika biznesowa, faktyczne odwzorowanie biznesu i jego reguł, łączenie się z innymi systemami,
+                        publikowanie zdarzeń i danych.
+                    </p>
+                    <h2>Dostępne kursy</h2>
+                    <div class="e-cards-mansory">
+                        <div class="e-card">
+                            <img src="https://efraa.github.io/eFrolic/assets/images/290x200.png" alt="eFrolic">
+                            <div class="card-body">
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+                                    nec iaculis mauris. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Przyszłe kursy</h2>
+                    <div class="e-cards-mansory">
+                        <div class="e-card">
+                            <img src="https://efraa.github.io/eFrolic/assets/images/290x200.png" alt="eFrolic">
+                            <div class="card-body">
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+                                    nec
+                                    iaculis mauris. </p>
+                            </div>
+                        </div>
+                        <div class="e-card">
+                            <img src="https://efraa.github.io/eFrolic/assets/images/290x200.png" alt="eFrolic">
+                            <div class="card-body">
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+                                    nec
+                                    iaculis mauris. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
             <!-- front ~ExtJS (nie było tam dużo widoku, on był wybrany) + widok (HTML ~widok dla czytników, CSS) -->
-            <m3-tile class="centered" data-color="rgba(247,86,118,.75)" data-width="20" data-text="Back-end"></m3-tile>
+            <!--<m3-tile class="centered" data-color="rgba(247,86,118,.75)" data-width="20" data-text="Back-end"></m3-tile>
             <m3-tile class="centered" data-color="rgba(255,221,87,.75)" data-width="18" data-text="Front-end"></m3-tile>
             <m3-tile class="centered" data-color="rgba(79,214,156,.75)" data-width="12" data-text="Bazy danych"></m3-tile>
             <m3-tile class="centered" data-color="rgba(29,161,242,.75)" data-width="10" data-text="Inżynieria oprogramowania"></m3-tile>
             <m3-tile class="centered" data-color="rgba(29,161,242,.75)" data-width="10" data-text="DevOps"></m3-tile>
-            <m3-tile class="centered" data-color="rgba(29,161,242,.75)" data-width="10" data-text="Architektura"></m3-tile>
+            <m3-tile class="centered" data-color="rgba(29,161,242,.75)" data-width="10" data-text="Architektura"></m3-tile>-->
         </div>
     </section>
 </main>
 
 <script src="index.js"></script>
 <script type="module" src="https://unpkg.com/@mat3e-ux/stars"></script>
+<script>
+    (function () {
+        const links = ["back-end", "front-end", "db", "arch", "devops", "eng"].map(id => document.getElementById(id));
+        window.addEventListener('hashchange', refreshAfterChange);
+
+        function refreshAfterChange() {
+            links.forEach(link => link.removeAttribute('disabled'));
+            const current = location.hash ? location.hash.substr(1) : 'back-end';
+            document.getElementById(current).setAttribute('disabled', '');
+        }
+
+        refreshAfterChange();
+    })();
+</script>
 </body>
 
 </html>

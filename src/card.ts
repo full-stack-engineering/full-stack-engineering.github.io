@@ -18,14 +18,24 @@ class M3Cards extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.innerHTML = '';
+        this.innerHTML = `
+            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                data-logo="empty.jpg">
+            </m3-card>
+            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                data-logo="empty.jpg">
+            </m3-card>
+            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                data-logo="empty.jpg">
+            </m3-card>
+        `;
         this.classList.add('e-cards', 'deck');
         const apiCourses = await getApiCourses();
-        (coursesData as CoursesData).courses
+        const cards = (coursesData as CoursesData).courses
             .filter(({logo}) => !!logo)
             .sort(() => Math.random() - 0.5)
             .slice(0, 3)
-            .map(({title, link, referralCode, logo }) => {
+            .map(({title, link, referralCode, logo}) => {
                 const {rating, numReviews, couponCode} = apiCourses
                     .find(({link: linkFromApi}) => link === linkFromApi) || {};
                 return {
@@ -44,8 +54,9 @@ class M3Cards extends HTMLElement {
                     .filter(([_, value]) => !!value)
                     .forEach(([key, value]) => result.dataset[key] = value);
                 return result;
-            })
-            .forEach(element => this.appendChild(element));
+            });
+        this.innerHTML = '';
+        cards.forEach(element => this.appendChild(element));
     }
 }
 

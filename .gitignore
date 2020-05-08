@@ -1,6 +1,8 @@
 next.html
 src/layout.ts
 src/tile.ts
+src/course.ts
+src/nav.ts
 program.html
 
 ######################
