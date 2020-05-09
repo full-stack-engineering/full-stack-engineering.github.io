@@ -6,15 +6,15 @@ export default function register() {
     customElements.define('m3-card', M3Card);
 }
 
-/*
-Scrolling with:
-<a class="e-btn circle transparent"><i class="fas fa-angle-left"></i></a>
-<a class="e-btn circle transparent"><i class="fas fa-angle-right"></i></a>
- */
 class M3Cards extends HTMLElement {
+    private index: number;
+    private cards: M3Card[];
+    private readonly window = 3;
+
     constructor() {
         super();
         // voting: "I want his course"
+        this.index = 0;
     }
 
     async connectedCallback() {
@@ -31,32 +31,61 @@ class M3Cards extends HTMLElement {
         `;
         this.classList.add('e-cards', 'deck');
         const apiCourses = await getApiCourses();
-        const cards = (coursesData as CoursesData).courses
-            .filter(({logo}) => !!logo)
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 3)
-            .map(({title, link, referralCode, logo}) => {
-                const {rating, numReviews, couponCode} = apiCourses
-                    .find(({link: linkFromApi}) => link === linkFromApi) || {};
-                return {
-                    title,
-                    link,
-                    referralCode,
-                    couponCode,
-                    rating,
-                    numReviews,
-                    logo
-                } as CardCourse;
-            })
-            .map(course => {
-                const result: HTMLElement = document.createElement('m3-card');
-                Object.entries(course)
-                    .filter(([_, value]) => !!value)
-                    .forEach(([key, value]) => result.dataset[key] = value);
-                return result;
-            });
+        if (!this.cards) {
+            this.cards = (coursesData as CoursesData).courses
+                .filter(({logo}) => !!logo)
+                .sort(() => Math.random() - 0.5)
+                .map(({title, link, referralCode, logo}) => {
+                    const {rating, numReviews, couponCode} = apiCourses
+                        .find(({link: linkFromApi}) => link === linkFromApi) || {};
+                    return {
+                        title,
+                        link,
+                        referralCode,
+                        couponCode,
+                        rating,
+                        numReviews,
+                        logo
+                    } as CardCourse;
+                })
+                .map(course => {
+                    const result: M3Card = document.createElement('m3-card') as M3Card;
+                    Object.entries(course)
+                        .filter(([_, value]) => !!value)
+                        .forEach(([key, value]) => result.dataset[key] = value);
+                    return result;
+                });
+        }
+        this.render();
+    }
+
+    increment() {
+        if (++this.index >= this.cards.length) {
+            this.index = 0;
+        }
+        this.render();
+    }
+
+    decrement() {
+        if (--this.index < 0) {
+            this.index = this.cards.length - 1;
+        }
+        this.render();
+    }
+
+    private render() {
+        const lastIndex: number = this.index + this.window;
+        const currentCards: M3Card[] = [];
+        for (let i = this.index; i < lastIndex && i < this.cards.length; ++i) {
+            currentCards.push(this.cards[i]);
+        }
+        for (let i = 0; i < this.window - currentCards.length + 1; ++i) {
+            currentCards.push(this.cards[i]);
+        }
         this.innerHTML = '';
-        cards.forEach(element => this.appendChild(element));
+        for (let i = 0; i < this.window; ++i) {
+            this.appendChild(currentCards[i]);
+        }
     }
 }
 
@@ -66,7 +95,7 @@ class M3Card extends HTMLElement {
     }
 
     connectedCallback() {
-        this.classList.add('e-card', 'no-mobile', 'white', 'd-flex');
+        this.classList.add('e-card', 'white', 'd-flex');
         const {title, link, couponCode, referralCode, logo, rating, numReviews} = (this.dataset as unknown) as CardCourse;
         this.innerHTML = `
           <img src="img/logo/${logo}" class="border-bottom" alt="${title} logo"/>

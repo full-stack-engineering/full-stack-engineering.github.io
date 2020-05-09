@@ -38,15 +38,30 @@
     <section class="face-body centered">
         <div class="e-container eUp">
             <h1 class="size-plus">Full-Stack Engineering</h1>
-            <a class="e-btn outlined transparent plus" href="program.html">Program</a>
-            <a class="e-btn outlined transparent plus">Kursy</a><br>
+            <!--<a class="e-btn outlined transparent plus" href="program.html">Program</a>
+            <a class="e-btn outlined transparent plus">Kursy</a><br>-->
         </div>
-        <m3-cards class="eSlide"></m3-cards>
+        <div class="centered no-mobile">
+            <a class="e-btn circle transparent" id="dec"><i class="fas fa-angle-left"></i></a>
+            <div style="display: inline-block; width: calc(100% - 192px)">
+                <m3-cards class="eSlide"></m3-cards>
+            </div>
+            <a class="e-btn circle transparent" id="inc"><i class="fas fa-angle-right"></i></a>
+        </div>
     </section>
 </main>
 
 <script src="index.js"></script>
 <script type="module" src="https://unpkg.com/@mat3e-ux/stars"></script>
+<script>
+    (function () {
+        const left = document.getElementById('dec');
+        const right = document.getElementById('inc');
+        const cards = document.querySelector('m3-cards');
+        left.addEventListener('click', () => cards.decrement());
+        right.addEventListener('click', () => cards.increment());
+    })();
+</script>
 </body>
 
 </html>
