@@ -18,20 +18,20 @@ class M3Cards extends HTMLElement {
     }
 
     async connectedCallback() {
-        this.innerHTML = `
-            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                data-logo="empty.jpg">
-            </m3-card>
-            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                data-logo="empty.jpg">
-            </m3-card>
-            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                data-logo="empty.jpg">
-            </m3-card>
-        `;
         this.classList.add('e-cards', 'deck');
-        const apiCourses = await getApiCourses();
         if (!this.cards) {
+            this.innerHTML = `
+                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                    data-logo="empty.jpg">
+                </m3-card>
+                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                    data-logo="empty.jpg">
+                </m3-card>
+                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                    data-logo="empty.jpg">
+                </m3-card>
+            `;
+            const apiCourses = await getApiCourses();
             this.cards = (coursesData as CoursesData).courses
                 .filter(({logo}) => !!logo)
                 .sort(() => Math.random() - 0.5)
@@ -74,18 +74,19 @@ class M3Cards extends HTMLElement {
     }
 
     private render() {
+        const cardsToAdd: M3Card[] = [];
         const lastIndex: number = this.index + this.window;
-        const currentCards: M3Card[] = [];
         for (let i = this.index; i < lastIndex && i < this.cards.length; ++i) {
-            currentCards.push(this.cards[i]);
+            cardsToAdd.push(this.cards[i]);
         }
-        for (let i = 0; i < this.window - currentCards.length + 1; ++i) {
-            currentCards.push(this.cards[i]);
+        const remaining: number = this.window - cardsToAdd.length;
+        for (let i = 0; i < remaining; ++i) {
+            cardsToAdd.push(this.cards[i]);
         }
-        this.innerHTML = '';
-        for (let i = 0; i < this.window; ++i) {
-            this.appendChild(currentCards[i]);
-        }
+        [...this.querySelectorAll('m3-card')]
+            .filter((card: M3Card) => !cardsToAdd.includes(card))
+            .forEach(card => card.remove());
+        cardsToAdd.forEach(card => this.appendChild(card));
     }
 }
 
