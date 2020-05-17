@@ -1,13 +1,19 @@
-const apiCoursesUrl = 'https://r53a9vitsc.execute-api.eu-west-1.amazonaws.com/default/udemy';
+const apiUrl = 'https://r53a9vitsc.execute-api.eu-west-1.amazonaws.com/default/udemy';
 
-export async function getApiCourses(): Promise<ApiCourse[]> {
-    const result: string = sessionStorage.getItem(apiCoursesUrl);
-    if (result) {
-        return JSON.parse(result);
+export async function getApiCourses(): Promise<ApiResponse> {
+    const cachedResult: string = sessionStorage.getItem(apiUrl);
+    if (cachedResult) {
+        return JSON.parse(cachedResult);
     }
-    const apiCourses: ApiCourse[] = await fetch(apiCoursesUrl).then(response => response.json());
-    sessionStorage.setItem(apiCoursesUrl, JSON.stringify(apiCourses));
-    return apiCourses;
+    const apiResult: ApiResponse = await fetch(apiUrl).then(response => response.json());
+    sessionStorage.setItem(apiUrl, JSON.stringify(apiResult));
+    return apiResult;
+}
+
+interface ApiResponse {
+    coupon: string;
+    deadline: string;
+    data: ApiCourse[];
 }
 
 interface ApiCourse {

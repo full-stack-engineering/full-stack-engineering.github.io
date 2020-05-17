@@ -41,12 +41,13 @@
             <!--<a class="e-btn outlined transparent plus" href="program.html">Program</a>
             <a class="e-btn outlined transparent plus">Kursy</a><br>-->
         </div>
+        <!-- TODO: carousel component, mobile-ready -->
         <div class="centered no-mobile">
-            <a class="e-btn circle transparent" id="dec"><i class="fas fa-angle-left"></i></a>
+            <a class="e-btn circle transparent eFade" id="dec"><i class="fas fa-angle-left"></i></a>
             <div style="display: inline-block; width: calc(100% - 192px)">
-                <m3-cards class="eSlide"></m3-cards>
+                <m3-cards data-window="3" class="eSlide"></m3-cards>
             </div>
-            <a class="e-btn circle transparent" id="inc"><i class="fas fa-angle-right"></i></a>
+            <a class="e-btn circle transparent eFade" id="inc"><i class="fas fa-angle-right"></i></a>
         </div>
     </section>
 </main>

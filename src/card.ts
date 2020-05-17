@@ -9,29 +9,27 @@ export default function register() {
 class M3Cards extends HTMLElement {
     private index: number;
     private cards: M3Card[];
-    private readonly window = 3;
+    private readonly window: number;
 
     constructor() {
         super();
         // voting: "I want his course"
         this.index = 0;
+        this.window = +this.dataset.window || 3;
     }
 
     async connectedCallback() {
         this.classList.add('e-cards', 'deck');
         if (!this.cards) {
-            this.innerHTML = `
-                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                    data-logo="empty.jpg">
-                </m3-card>
-                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                    data-logo="empty.jpg">
-                </m3-card>
-                <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
-                    data-logo="empty.jpg">
-                </m3-card>
+            const placeholder = `
+            <m3-card data-title="..." data-link="..." data-referral-code="..." data-rating="5" data-num-reviews="?" 
+                data-logo="empty.jpg">
+            </m3-card>
             `;
-            const apiCourses = await getApiCourses();
+            for (let i = 0; i < this.window; ++i) {
+                this.innerHTML += placeholder;
+            }
+            const apiCourses = (await getApiCourses()).data;
             this.cards = (coursesData as CoursesData).courses
                 .filter(({logo}) => !!logo)
                 .sort(() => Math.random() - 0.5)
