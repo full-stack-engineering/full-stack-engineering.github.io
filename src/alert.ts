@@ -24,7 +24,7 @@ class M3Alert extends HTMLElement {
             this.innerHTML = `
                 <div class="e-alert warning">
                   <i class="fas fa-exclamation-circle e-icon"></i> 
-                  Kursy po <strong>48,99</strong> z kuponem "<strong>${coupon}</strong>"!
+                  Kupuj z kuponem "<strong>${coupon}</strong>"!
                 </div>
             `;
         }
