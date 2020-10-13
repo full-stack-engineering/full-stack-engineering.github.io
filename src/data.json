@@ -93,7 +93,7 @@
             "title": "Architektura aplikacji - back-end, Java<br/><br/>",
             "link": "/course/architektura-java/",
             "referralCode": "2F9A960416F69ACC455A",
-            "logo": "clean.png",
+            "logo": "clean.jpg",
             "category": "arch",
             "description": "Refactoring z kuli błota * Modularność * Moduły Mavena * Czysta architektura i DDD * porty i adaptery * Command Query Responsibility Segregation * wzorce"
         },
