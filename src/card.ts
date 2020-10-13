@@ -95,7 +95,7 @@ class M3Card extends HTMLElement {
 
     connectedCallback() {
         this.classList.add('e-card', 'white', 'd-flex');
-        const {title, link, couponCode, referralCode, logo, rating, numReviews} = (this.dataset as unknown) as CardCourse;
+        const {title, link, couponCode, referralCode, logo, rating = 0, numReviews = 0} = (this.dataset as unknown) as CardCourse;
         this.innerHTML = `
           <img src="img/logo/${logo}" class="border-bottom" alt="${title} logo"/>
           <div class="card-body d-flex align-elements">
