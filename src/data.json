@@ -39,7 +39,6 @@
             "title": "JavaScript i front-end (nie tylko) dla back-endowców",
             "link": "/course/fe4be-pl/",
             "referralCode": "2AFE6D84786CB1CCFE4D",
-            "logo": "fe4be.jpg",
             "category": "front-end",
             "description": "Node.js * ES6 * Klasy w stylu JS * TypeScript * Wstęp do Reacta * Testowanie i budowanie aplikacji * CSS"
         },
@@ -48,7 +47,6 @@
             "title": "Fajny JavaScript - zaawansowane techniki ES6+",
             "link": "/course/fajny-javascript/",
             "referralCode": "7479E688776B32AAB63E",
-            "logo": "js.jpg",
             "category": "front-end",
             "description": "Webpack * Web Components * fetch, Promise, async/await * ESLint * Destrukturyzacja, domyślne wartości * Generatory, Proxy"
         },
